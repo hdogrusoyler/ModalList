@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@*<div class="row">*@
+    @Html.Partial("_Modal")
+@*</div>*@
+<div class="row">
+    @Html.Partial("_Partial")
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <form class="mt-3">
+            <div class="form-group">
+                <label for="Ad">Ad</label>
+                <input type="text" class="form-control" id="Ad" placeholder="Ad">
+            </div>
+            <div class="form-group">
+                <label for="SoyAd">SoyAd</label>
+                <input type="text" class="form-control" id="SoyAd" placeholder="SoyAd">
+            </div>
+            <div class="form-group">
+                <label for="Il">Il</label>
+                <input type="text" class="form-control" id="Il" placeholder="Il">
+            </div>
+            <div class="form-group">
+                <label for="Ilce">Ilce</label>
+                <input type="text" class="form-control" id="Ilce" placeholder="Ilce">
+            </div>
+            <div class="form-group">
+                <label for="Adres">Adres</label>
+                <input type="text" class="form-control" id="Adres" placeholder="Adres">
+            </div>
+            <div class="form-group">
+                <label for="PostaKodu">PostaKodu</label>
+                <input type="text" class="form-control" id="PostaKodu" placeholder="PostaKodu">
+            </div>
+            <button id="add" class="btn btn-default">Add</button>
+            <button id="del" class="btn btn-default">Delete</button>
+            <button id="edt" class="btn btn-default">Edit</button>
+        </form>
+    </div>
+    <div class="col-md-9">
+
+        <p>View</p>
+
+        <table id="table_id" class="display">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ad</th>
+                    <th>SoyAd</th>
+                    <th>Il</th>
+                    <th>Ilce date</th>
+                    <th>Adres</th>
+                    <th>PostaKodu</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Ad</th>
+                    <th>SoyAd</th>
+                    <th>Il</th>
+                    <th>Ilce date</th>
+                    <th>Adres</th>
+                    <th>PostaKodu</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/js/crud.js"></script>
+    <script src="~/Content/js/partial.js"></script>
+    <script src="~/Content/js/modal.js"></script>
+}
