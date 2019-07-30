@@ -83,7 +83,7 @@ $(function () {
 
                         $(".fnselections").change(mUI.Fonks.getSelections);
                         mUI.Elements.$modal.modal('hide');
-
+                         
                         console.log(data);
                     },
                     error: function (error) {
