@@ -20,12 +20,12 @@ $(function () {
         Values: {
             Id: "",
             Data: {
-                Ad: mUI.Elements.$mAd.val(),
-                SoyAd: mUI.Elements.$mSoyAd.val(),
-                Il: mUI.Elements.$mIl.val(),
-                Ilce: mUI.Elements.$mIlce.val(),
-                Adres: mUI.Elements.$mAdres.val(),
-                PostaKodu: mUI.Elements.$mPostaKodu.val()
+                //Ad: mUI.Elements.$mAd.val(),
+                //SoyAd: mUI.Elements.$mSoyAd.val(),
+                //Il: mUI.Elements.$mIl.val(),
+                //Ilce: mUI.Elements.$mIlce.val(),
+                //Adres: mUI.Elements.$mAdres.val(),
+                //PostaKodu: mUI.Elements.$mPostaKodu.val()
             }
         },
         Fonks: {
@@ -70,7 +70,14 @@ $(function () {
             },
             addUser: function (e) {
 
-                let data = mUI.Values.Data;
+                let data = {
+                    Ad: mUI.Elements.$mAd.val(),
+                    SoyAd: mUI.Elements.$mSoyAd.val(),
+                    Il: mUI.Elements.$mIl.val(),
+                    Ilce: mUI.Elements.$mIlce.val(),
+                    Adres: mUI.Elements.$mAdres.val(),
+                    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                }
 
                 $.ajax({
                     type: "POST",
@@ -94,7 +101,15 @@ $(function () {
             },
             delUser: function (e) {
 
-                let data = data = mUI.Values.Data;
+                let data = {
+                    Id: mUI.Values.Id,
+                    Ad: mUI.Elements.$mAd.val(),
+                    SoyAd: mUI.Elements.$mSoyAd.val(),
+                    Il: mUI.Elements.$mIl.val(),
+                    Ilce: mUI.Elements.$mIlce.val(),
+                    Adres: mUI.Elements.$mAdres.val(),
+                    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                }
 
                 console.log(data);
 
@@ -119,7 +134,15 @@ $(function () {
             },
             updUser: function (e) {
 
-                let data = data = mUI.Values.Data;
+                let data = {
+                    Id: mUI.Values.Id,
+                    Ad: mUI.Elements.$mAd.val(),
+                    SoyAd: mUI.Elements.$mSoyAd.val(),
+                    Il: mUI.Elements.$mIl.val(),
+                    Ilce: mUI.Elements.$mIlce.val(),
+                    Adres: mUI.Elements.$mAdres.val(),
+                    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                }
 
                 $.ajax({
                     type: "POST",
