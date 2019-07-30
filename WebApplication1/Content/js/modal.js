@@ -18,15 +18,7 @@ $(function () {
             $mdel: $("#mdel")
         },
         Values: {
-            Id: "",
-            Data: {
-                //Ad: mUI.Elements.$mAd.val(),
-                //SoyAd: mUI.Elements.$mSoyAd.val(),
-                //Il: mUI.Elements.$mIl.val(),
-                //Ilce: mUI.Elements.$mIlce.val(),
-                //Adres: mUI.Elements.$mAdres.val(),
-                //PostaKodu: mUI.Elements.$mPostaKodu.val()
-            }
+            Id: ""
         },
         Fonks: {
             getUsers: function () {
@@ -55,34 +47,34 @@ $(function () {
                     $(this).parents("tr").children().each(function () {
                         select.push($(this).html());
                     });
+                    $("#Id").val(select[1]).trigger("change");
+                    mUI.Elements.$mAd.val(select[2]).trigger("change");
+                    mUI.Elements.$mSoyAd.val(select[3]).trigger("change");
+                    mUI.Elements.$mIl.val(select[4]).trigger("change");
+                    mUI.Elements.$mIlce.val(select[5]).trigger("change");
+                    mUI.Elements.$mAdres.val(select[6]).trigger("change");
+                    mUI.Elements.$mPostaKodu.val(select[7]).trigger("change");
 
-                    mUI.Elements.$mAd.val(select[2]);
-                    mUI.Elements.$mSoyAd.val(select[3]);
-                    mUI.Elements.$mIl.val(select[4]);
-                    mUI.Elements.$mIlce.val(select[5]);
-                    mUI.Elements.$mAdres.val(select[6]);
-                    mUI.Elements.$mPostaKodu.val(select[7]);
-
-                    mUI.Values.Id = select[1];
+                    //mUI.Values.Id = select[1];
 
                     mUI.Elements.$modal.modal('show');
                 }
             },
             addUser: function (e) {
 
-                let data = {
-                    Ad: mUI.Elements.$mAd.val(),
-                    SoyAd: mUI.Elements.$mSoyAd.val(),
-                    Il: mUI.Elements.$mIl.val(),
-                    Ilce: mUI.Elements.$mIlce.val(),
-                    Adres: mUI.Elements.$mAdres.val(),
-                    PostaKodu: mUI.Elements.$mPostaKodu.val()
-                }
-
+                //let data = {
+                //    Ad: mUI.Elements.$mAd.val(),
+                //    SoyAd: mUI.Elements.$mSoyAd.val(),
+                //    Il: mUI.Elements.$mIl.val(),
+                //    Ilce: mUI.Elements.$mIlce.val(),
+                //    Adres: mUI.Elements.$mAdres.val(),
+                //    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                //}
+                mUI.Data.Id=null;
                 $.ajax({
                     type: "POST",
                     data: {
-                        u: data
+                        u: mUI.Data
                     },
                     url: "/home/AddUser",
                     success: function (data) {
@@ -101,22 +93,22 @@ $(function () {
             },
             delUser: function (e) {
 
-                let data = {
-                    Id: mUI.Values.Id,
-                    Ad: mUI.Elements.$mAd.val(),
-                    SoyAd: mUI.Elements.$mSoyAd.val(),
-                    Il: mUI.Elements.$mIl.val(),
-                    Ilce: mUI.Elements.$mIlce.val(),
-                    Adres: mUI.Elements.$mAdres.val(),
-                    PostaKodu: mUI.Elements.$mPostaKodu.val()
-                }
+                //mUI.Data = {
+                //    Id: mUI.Values.Id,
+                //    Ad: mUI.Elements.$mAd.val(),
+                //    SoyAd: mUI.Elements.$mSoyAd.val(),
+                //    Il: mUI.Elements.$mIl.val(),
+                //    Ilce: mUI.Elements.$mIlce.val(),
+                //    Adres: mUI.Elements.$mAdres.val(),
+                //    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                //}
 
-                console.log(data);
+                console.log(mUI.Data);
 
                 $.ajax({
                     type: "POST",
                     data: {
-                        u: data
+                        u: mUI.Data
                     },
                     url: "/home/DeleteUser",
                     success: function (data) {
@@ -124,7 +116,9 @@ $(function () {
                         $("#mtable tbody #" + data.Result.Id + "").remove();
                         mUI.Elements.$modal.modal('hide');
 
-                        console.log(data);
+                        //console.log(data);
+
+                        console.log(mUI.Data);
                     },
                     error: function (error) {
                         console.log(error);
@@ -134,20 +128,20 @@ $(function () {
             },
             updUser: function (e) {
 
-                let data = {
-                    Id: mUI.Values.Id,
-                    Ad: mUI.Elements.$mAd.val(),
-                    SoyAd: mUI.Elements.$mSoyAd.val(),
-                    Il: mUI.Elements.$mIl.val(),
-                    Ilce: mUI.Elements.$mIlce.val(),
-                    Adres: mUI.Elements.$mAdres.val(),
-                    PostaKodu: mUI.Elements.$mPostaKodu.val()
-                }
+                //let data = {
+                //    Id: mUI.Values.Id,
+                //    Ad: mUI.Elements.$mAd.val(),
+                //    SoyAd: mUI.Elements.$mSoyAd.val(),
+                //    Il: mUI.Elements.$mIl.val(),
+                //    Ilce: mUI.Elements.$mIlce.val(),
+                //    Adres: mUI.Elements.$mAdres.val(),
+                //    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                //}
 
                 $.ajax({
                     type: "POST",
                     data: {
-                        u: data
+                        u: mUI.Data
                     },
                     url: "/home/UpdateUser",
                     success: function (data) {
@@ -167,13 +161,50 @@ $(function () {
                     }
                 });
                 e.preventDefault();
+            },
+            ChangeData: function (e) {
+                const {name} = e.currentTarget.dataset;
+                mUI.Data[name]= e.currentTarget.value;
+            },
+            getData: function () {
+                mUI.Data = {
+                    Id: mUI.Values.Id,
+                    Ad: mUI.Elements.$mAd.val(),
+                    SoyAd: mUI.Elements.$mSoyAd.val(),
+                    Il: mUI.Elements.$mIl.val(),
+                    Ilce: mUI.Elements.$mIlce.val(),
+                    Adres: mUI.Elements.$mAdres.val(),
+                    PostaKodu: mUI.Elements.$mPostaKodu.val()
+                }
             }
+        },
+        Data: {
+            Id: null,
+            Ad: "",
+            SoyAd: "",
+            Il: "",
+            Ilce: "",
+            Adres: "",
+            PostaKodu: "",
+        },
+        init: function () {
+            const { $mAd,$mSoyAd,$mIl,$mIlce,$mAdres,$mPostaKodu} = mUI.Elements;
+            const {ChangeData,getUsers} = mUI.Fonks;
+            $("#Id").change(ChangeData);
+           $mAd.change(ChangeData);
+            $mSoyAd.change(ChangeData);
+            $mIl.change(ChangeData);
+            $mIlce.change(ChangeData);
+            $mAdres.change(ChangeData);
+            $mPostaKodu.change(ChangeData);
+            
+            getUsers();
+
+            mUI.Elements.$madd.click(mUI.Fonks.addUser);
+            mUI.Elements.$mdel.click(mUI.Fonks.delUser);
+            mUI.Elements.$medt.click(mUI.Fonks.updUser);
         }
     }
 
-    mUI.Fonks.getUsers();
-
-    mUI.Elements.$madd.click(mUI.Fonks.addUser);
-    mUI.Elements.$mdel.click(mUI.Fonks.delUser);
-    mUI.Elements.$medt.click(mUI.Fonks.updUser);
+    mUI.init();
 });

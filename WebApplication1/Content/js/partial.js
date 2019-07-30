@@ -9,12 +9,13 @@ window.UI.Fonks = {
     bindElements: function () {
         UI.Elements = {
             $pAd: $('#pAd'),
-            $padd: $("#padd"),
+            
             $pSoyAd: $('#pSoyAd'),
             $pIl: $('#pIl'),
             $pIlce: $('#pIlce'),
             $pAdres: $('#pAdres'),
             $pPostaKodu: $('#pPostaKodu'),
+            $padd: $("#padd"),
         }
     },
     getUsers: function () {
@@ -25,9 +26,10 @@ window.UI.Fonks = {
             url: "/home/GetUsers",
             success: function (data) {
                 data.data.forEach(function (item, index, array) {
-                    $("#table tbody").append("<tr id='" + item.Id + "'><th><input type='checkbox' name='usr' value='" + item.Id + "' onchange='functionTest()'></th><th>" + item.Id + "</th><th>" + item.Ad + "</th><th>" + item.SoyAd + "</th><th>" + item.Il + "</th><th>" + item.Ilce + "</th><th>" + item.Adres + "</th><th>" + item.PostaKodu + "</th></tr>");
+                    $("#table tbody").append("<tr id='" + item.Id + "'><th><input type='checkbox' name='usr' value='" + item.Id + "'></th><th>" + item.Id + "</th><th>" + item.Ad + "</th><th>" + item.SoyAd + "</th><th>" + item.Il + "</th><th>" + item.Ilce + "</th><th>" + item.Adres + "</th><th>" + item.PostaKodu + "</th></tr>");
+                    
                 });
-
+                $("#table input[type='checkbox']").change(functionTest);
                 console.log(data);
             },
             error: function (error) {
@@ -37,23 +39,30 @@ window.UI.Fonks = {
     }
 }
 
-function functionTest() {
+function functionTest(e) {
     var selected = [];
-    $('#table tbody tr th input:checked').each(function () {
-        selected.push($(this).attr('value'));
-    });
+    //$('#table tbody tr th input:checked').each(function () {
+    //    selected.push($(this).attr('value'));
+    //});
 
     var select = [];
-    $("#table tbody #" + selected[0] + " th").each(function () {
-        select.push($(this).html());
+    //$("#table tbody #" + selected[0] + " th").each(function () {
+    //    select.push($(this).html());
+    //});
+    const $rows = $(e.currentTarget).parents("tr").children();
+    $rows.each(function (index, item) {
+        select.push($(item).html());
     });
-
-    UI.Elements.$pAd.val(select[2]);
-    UI.Elements.$pSoyAd.val(select[3]);
-    UI.Elements.$pIl.val(select[4]);
-    UI.Elements.$pIlce.val(select[5]);
-    UI.Elements.$pAdres.val(select[6]);
-    UI.Elements.$pPostaKodu.val(select[7]);
+    const y=window.UI.Elements;
+    Object.keys(y).forEach(function (key, index) {
+        y[key].val(select[index + 2]);
+    });
+    //UI.Elements.$pAd.val(select[2]);
+    //UI.Elements.$pSoyAd.val(select[3]);
+    //UI.Elements.$pIl.val(select[4]);
+    //UI.Elements.$pIlce.val(select[5]);
+    //UI.Elements.$pAdres.val(select[6]);
+    //UI.Elements.$pPostaKodu.val(select[7]);
 }
 
 
